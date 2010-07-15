@@ -23,12 +23,12 @@ end
 def create_cookbook(dir)
   raise "Must provide a COOKBOOK=" unless ENV["COOKBOOK"]
   puts "** Creating cookbook #{ENV["COOKBOOK"]}"
-  sh "mkdir -p #{File.join(dir, ENV["COOKBOOK"], "attributes")}" 
-  sh "mkdir -p #{File.join(dir, ENV["COOKBOOK"], "recipes")}" 
-  sh "mkdir -p #{File.join(dir, ENV["COOKBOOK"], "definitions")}" 
-  sh "mkdir -p #{File.join(dir, ENV["COOKBOOK"], "libraries")}" 
-  sh "mkdir -p #{File.join(dir, ENV["COOKBOOK"], "files", "default")}" 
-  sh "mkdir -p #{File.join(dir, ENV["COOKBOOK"], "templates", "default")}" 
+  sh "mkdir #{File.join(dir, ENV["COOKBOOK"], "attributes").gsub(/[\/]/,'\\') }" 
+  sh "mkdir #{File.join(dir, ENV["COOKBOOK"], "recipes").gsub(/[\/]/,'\\')}" 
+  sh "mkdir #{File.join(dir, ENV["COOKBOOK"], "definitions").gsub(/[\/]/,'\\')}" 
+  sh "mkdir #{File.join(dir, ENV["COOKBOOK"], "libraries").gsub(/[\/]/,'\\')}" 
+  sh "mkdir #{File.join(dir, ENV["COOKBOOK"], "files", "default").gsub(/[\/]/,'\\')}" 
+  sh "mkdir #{File.join(dir, ENV["COOKBOOK"], "templates", "default").gsub(/[\/]/,'\\')}" 
   unless File.exists?(File.join(dir, ENV["COOKBOOK"], "recipes", "default.rb"))
     open(File.join(dir, ENV["COOKBOOK"], "recipes", "default.rb"), "w") do |file|
       file.puts <<-EOH
